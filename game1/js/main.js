@@ -28,7 +28,7 @@ window.onload = function() {
     // Create a sprite at the center of the screen using the 'logo' image.
     bouncy = game.add.sprite(game.world.centerX, game.world.centerY, 'logo');
 
-    bouncy.scale.setTo(0.2, 0.2);
+
     // Anchor the sprite at its center, as opposed to its top-left corner.
     // so it will be truly centered.
     bouncy.anchor.setTo(0.5, 0.5);
@@ -51,6 +51,8 @@ window.onload = function() {
     };
     var text = game.add.text(game.world.centerX, 15, "Build something. anything...", style);
     text.anchor.setTo(0.5, 0.0);
+
+    bouncy.scale.setTo(0.2, 0.2);
   }
 
   function update() {
