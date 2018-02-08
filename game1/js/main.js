@@ -35,7 +35,8 @@ window.onload = function() {
 
     game.stage.backgroundColor = '#44e461';
 
-    game.add.audio('mymusic');
+    var music = game.add.audio('mymusic');
+    music.play();
 
     // Turn on the arcade physics engine for this sprite.
     game.physics.enable(bouncy, Phaser.Physics.ARCADE);
