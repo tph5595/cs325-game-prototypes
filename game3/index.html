@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Phaser Basic Project Template</title>
+	<script src="js/phaser.min.js"></script>
+	<!-- Boot.js must come first since it creates the BasicGame object
+	that stores all the states. -->
+	<script src="js/Boot.js"></script>
+	<script src="js/Preloader.js"></script>
+	<script src="js/MainMenu.js"></script>
+	<script src="js/Game.js"></script>
+	<!-- main.js must come last since it references the other ones. -->
+	<script src="js/main.js"></script>
+
+	<style>
+		body {
+			color: #777;
+			font-family: "Avenir", Verdana, sans-serif;
+		}
+
+		#readme {
+			margin-top: 10px;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div id="game"></div>
+	<div id="readme">
+		<h2>Star Struck</h2>
+
+		<ul>
+			<li><strong>Originality:</strong> I modified a lot of the graphics from base templates i found online. I also can up with the idea of flipping between walls and rotaing the map to dodge enemies.
+			</li>
+
+			<li><strong>Technical Merit:</strong> Player can control map rotatation while they stay still to dodge enemies.
+			</li>
+
+			<li><strong>Prototype Postmortem:</strong> The hardest part was teh whole thing. getting all the grpahics to rotate and scale properly and to get the movement feeling decent.
+			</li>
+
+			<li><strong>Prototype Assets:</strong> modified assets from online
+				<ul>
+					<li>baddies/heros/tiles: https://itch.io/game-assets/free</li>
+					<li>galaxy: https://pngtree.com/freebackground/cartoon-galaxy-asteroid-background_359923.html</li>
+					<li>star: https://www.designtrends.com/graphic-web/cliparts/star-clipart.html</li>
+					<li>music: http://freemusicarchive.org/genre/Ambient_Electronic/</li>
+					<li>jump sound: http://soundbible.com/1601-Mario-Jumping.html</li>
+				</ul>
+			</li>
+
+			<li><strong>Prototype Closest Other Game:</strong> nothing to be knowledge. I came up with the idea on my own and only borrowed extremly small sections of code from other places (beside the template-gamestate in this repo).
+
+			</li>
+
+			<li><strong>High Concept:</strong> See how long you can last dodging shooting stars
+			</li>
+
+			<li><strong>Theme:</strong> stars
+			</li>
+
+			<li><strong>Mandated Variety:</strong> I have not made a platorming game yet
+			</li>
+
+			<li><strong>Prototype Goal:</strong> see if the world flip is a good game mechanic
+			</li>
+
+			<li><strong>Player Experience Goals:</strong> high addrenaline rush and wanting to push for a higher and higher score.
+			</li>
+
+			<li><strong>Gameplay:</strong> players use the arrow keys to move around and WAD to flip the world. Also Space to jump. they try to see how long they can last dodging shooting stars
+			</li>
+
+			<li><strong>Strategies:</strong> flip the world when about to get hit, cannot get hit when world is flipping.
+			</li>
+
+			<li><strong>Story/Setting/Premise:</strong> You have made the stars angery on instagram and they are coming for you and your followers. dodge the stars and game more followers with time.
+			</li>
+
+			<li><strong>Target Audience:</strong>I am tryign to reach highly competitive people aroudn the age of 15-22 who already play video games on the regular and are looking for a new challenge.
+			</li>
+
+			<li><strong>Play Time:</strong> it can last as short or as long as possible. its a skill based game. most likley around 2 minutes though.
+			</li>
+
+		</ul>
+	</div>
+</body>
+
+</html>
