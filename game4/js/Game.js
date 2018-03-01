@@ -32,6 +32,10 @@ BasicGame.Game = function(game) {
   this.maxIceY = null;
   this.maxIceCopy = null;
   this.iceCubesStopped = null;
+  this.popSound = null;
+  this.dripSound = null;
+  this.winSound = null;
+  this.loseSound = null;
 };
 
 BasicGame.Game.prototype = {
@@ -77,14 +81,19 @@ BasicGame.Game.prototype = {
     mygame = this;
 
     this.music = this.add.audio('gameMusic');
+    this.popSound = this.add.audio('popSound');
+    this.dripSound = this.add.audio('dripSound');
+    this.winSound = this.add.audio('winSound');
+    this.loseSound = this.add.audio('loseSound');
     this.music.fadeIn(4000);
+    this.music.volume = 0.5
 
-    this.scoreText = this.add.text(60, 32, '50000');
+    this.scoreText = this.add.text(60, 32, '10000');
     this.scoreText.font = 'VT323';
     this.scoreText.fontSize = 30;
     this.scoreText.fill = "#ffffff";
     this.scoreText.align = "left";
-    this.score = 50000;
+    this.score = 10000;
 
     this.sun1 = this.add.sprite(50, 50, 'sun1');
     this.sun2 = this.add.sprite(250, 50, 'sun2');
@@ -134,6 +143,14 @@ BasicGame.Game.prototype = {
     this.bad = 0;
 
     this.maxIceY = 1000;
+
+    window.addEventListener("keydown", function(e) {
+      // space and arrow keys
+      if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+        e.preventDefault();
+      }
+    }, false);
+
   },
 
   update: function() {
@@ -147,22 +164,10 @@ BasicGame.Game.prototype = {
 
       if (this.cursors.left.isDown && this.player.x > 50) {
         this.player.x -= 8;
-        this.player.angle = 180;
         this.iceCubesStopped.forEach(this.moveIceLeft);
-        if (this.flipped === false) {
-          this.player.scale.y *= -1;
-
-          this.flipped = true;
-        }
       } else if (this.cursors.right.isDown && this.player.x < 750) {
         this.player.x += 8;
-        this.player.angle = 0;
         this.iceCubesStopped.forEach(this.moveIceRight);
-        if (this.flipped === true) {
-          this.flipped = false;
-          this.player.scale.y *= -1;
-
-        }
       }
 
       if (this.player.x < 50) {
@@ -215,6 +220,8 @@ BasicGame.Game.prototype = {
       if (this.bad >= 100) {
         this.melt();
         this.bad = 0;
+        this.score -= 300;
+        this.scoreText.text = this.score;
       }
 
       this.iceCubes.forEach(this.outIce);
@@ -243,7 +250,7 @@ BasicGame.Game.prototype = {
     if (Math.random() > this.spawnRate) {
 
       var x = this.world.randomX;
-      var y = -100;
+      var y = -50;
 
       if (x < 200) {
         x = 50;
@@ -254,6 +261,7 @@ BasicGame.Game.prototype = {
       } else {
         x = 650;
       }
+      this.popSound.play();
       this.iceCubes.create(x, y, 'enemy');
     }
   },
@@ -328,6 +336,7 @@ BasicGame.Game.prototype = {
     this.iceCubesStopped.forEach(this.maxIce);
     if (this.maxIceCopy != null) {
       this.maxIceCopy.destroy();
+      this.dripSound.play();
     }
   },
 
@@ -359,7 +368,8 @@ BasicGame.Game.prototype = {
     }, 2000, "Linear", true);
 
     this.time.events.stop();
-    this.music.fadeOut(1000);
+    this.music.stop();
+    this.loseSound.play();
 
     var butt = this.add.button(this.world.centerX - 95, 450, 'restartButton', this.restart, this, 2, 1, 0);
 
@@ -383,6 +393,7 @@ BasicGame.Game.prototype = {
 
     this.time.events.stop();
     this.music.fadeOut(1000);
+    this.winSound.play();
 
     var butt = this.add.button(this.world.centerX - 95, 450, 'restartButton', this.restart, this, 2, 1, 0);
 

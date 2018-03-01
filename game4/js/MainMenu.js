@@ -17,6 +17,7 @@ BasicGame.MainMenu.prototype = {
 
     this.music = this.add.audio('titleMusic');
     this.music.play();
+    this.music.volume = 0.5
 
     var back = this.add.sprite(0, 0, 'titlePage');
     back.width = 800;
