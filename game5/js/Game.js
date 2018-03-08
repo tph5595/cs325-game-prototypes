@@ -37,6 +37,9 @@ BasicGame.Game = function(game) {
   this.timer = null;
   this.timerTime = null;
   this.keyvalue = -1;
+  this.eatingSound = null;
+  this.cookingSound = null;
+  this.thankyouSound = null;
 };
 
 BasicGame.Game.prototype = {
@@ -49,24 +52,28 @@ BasicGame.Game.prototype = {
     mygame = this;
 
     this.music = this.add.audio('gameMusic');
-    //this.music.fadeIn(4000);
+    this.music.fadeIn(4000);
+
+    this.thankyouSound = this.add.audio('thankyou');
+    this.eatingSound = this.add.audio('eating');
+    this.cookingSound = this.add.audio('cooking');
 
     this.canChange = true;
     this.add.sprite(0, 0, 'gameback');
 
-    this.scoreText = this.add.text(60, 550, 'Tips: $0.00');
+    this.scoreText = this.add.text(600, 510, 'Tips: $0.00');
     this.scoreText.font = 'VT323';
     this.scoreText.fontSize = 30;
     this.scoreText.fill = "#ffffff";
     this.scoreText.align = "left";
     this.score = 0;
 
-    this.timer = this.add.text(300, 400, '150');
+    this.timer = this.add.text(20, 510, 'Time till close:\n 100 minutes');
     this.timer.font = 'VT323';
-    this.timer.fontSize = 200;
+    this.timer.fontSize = 30;
     this.timer.fill = "#ffffff";
     this.timer.align = "left";
-    this.timerTime = 150;
+    this.timerTime = 100;
 
     this.flipped = false;
 
@@ -138,7 +145,7 @@ BasicGame.Game.prototype = {
 
     this.enemyspeed = 10000;
 
-    this.spawnRate = 0.98;
+    this.spawnRate = 0.333;
 
     this.x4 = 50;
     this.y4 = 300;
@@ -302,23 +309,23 @@ BasicGame.Game.prototype = {
   },
 
   spawn: function() {
-    //  if (Math.random() > this.spawnRate) {
-    var num = Math.random() * 4;
+    if (Math.random() < this.spawnRate) {
+      var num = Math.random() * 4;
 
-    if (num < 1 && this.cust1.alpha != 1) {
-      this.cust1.alpha = 1;
-      this.done1 = false;
-    } else if (num < 2 && this.cust2.alpha != 1) {
-      this.cust2.alpha = 1;
-      this.done2 = false;
-    } else if (num < 3 && this.cust3.alpha != 1) {
-      this.cust3.alpha = 1;
-      this.done3 = false;
-    } else if (this.cust4.alpha != 1) {
-      this.cust4.alpha = 1;
-      this.done4 = false;
+      if (num < 1 && this.cust1.alpha != 1) {
+        this.cust1.alpha = 1;
+        this.done1 = false;
+      } else if (num < 2 && this.cust2.alpha != 1) {
+        this.cust2.alpha = 1;
+        this.done2 = false;
+      } else if (num < 3 && this.cust3.alpha != 1) {
+        this.cust3.alpha = 1;
+        this.done3 = false;
+      } else if (this.cust4.alpha != 1) {
+        this.cust4.alpha = 1;
+        this.done4 = false;
+      }
     }
-    //}
   },
 
   serveClosest: function() {
@@ -331,6 +338,11 @@ BasicGame.Game.prototype = {
       this.w2.alpha = 0;
       this.w3.alpha = 0;
       this.w4.alpha = 0;
+      if (Math.random() > 0.5) {
+        this.thankyouSound.play();
+      } else {
+        this.eatingSound.play();
+      }
     }
   },
 
@@ -396,7 +408,7 @@ BasicGame.Game.prototype = {
 
   timerUpdate: function() {
     this.timerTime -= 1;
-    this.timer.text = this.timerTime;
+    this.timer.text = "Time till close:\n " + this.timerTime + " minutes";
     if (this.timerTime == 0) {
       this.gameOver();
     }
@@ -496,6 +508,8 @@ BasicGame.Game.prototype = {
   },
 
   showIt: function(num) {
+    this.keyvalue = -1;
+    this.cookingSound.play();
     this.w1.alpha = 0;
     this.w2.alpha = 0;
     this.w3.alpha = 0;
