@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Quick Maths</title>
+	<script src="js/phaser.min.js"></script>
+	<!-- Boot.js must come first since it creates the BasicGame object
+	that stores all the states. -->
+	<script src="js/Boot.js"></script>
+	<script src="js/Preloader.js"></script>
+	<script src="js/MainMenu.js"></script>
+	<script src="js/Game.js"></script>
+	<!-- main.js must come last since it references the other ones. -->
+	<script src="js/main.js"></script>
+
+	<style>
+		body {
+			color: #777;
+			font-family: "Avenir", Verdana, sans-serif;
+		}
+
+		#readme {
+			margin-top: 10px;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div id="game"></div>
+	<div id="readme">
+		<h2>Quick Maths</h2>
+
+		<ul>
+			<li><strong>Originality:</strong> I modified a lot of the graphics from base templates i found online. The other originality that i added is that you have to spell out the food you want to serve the customers. thus combing learning with a fun game for
+				kids.
+			</li>
+
+			<li><strong>Technical Merit:</strong> blind typing to get the food you want in a diner dash kinda game.
+			</li>
+
+			<li><strong>Prototype Postmortem:</strong>The hardest part was keeping track of what letter i am on and to calculate the closest customer
+			</li>
+
+			<li><strong>Prototype Assets:</strong> modified assets from online
+				<ul>
+					<li>squirrel: https://www.colourbox.com/vector/cute-cartoon-squirrel-vector-6980042</li>
+					<li>another squirrel: https://www.dreamstime.com/stock-illustration-cartoon-squirrel-cute-looking-back-vector-clip-art-illustration-simple-gradients-all-single-layer-image58190693</li>
+					<li>fat squirrel: https://www.bigstockphoto.com/search/squirrel-cartoon/</li>
+					<li>crazy squirrel: https://graphicriver.net/item/cartoon-squirrel/13286092</li>
+					<li>happy squirrel: https://www.123rf.com/photo_45709941_stock-vector-happy-cartoon-squirrel-running-with-an-acorn-vector-clip-art-illustration-with-simple-gradients-acor.html</li>
+					<li>background: https://previews.123rf.com/images/inhasemiankova/inhasemiankova1603/inhasemiankova160300124/68493637-vector-cartoon-game-background-of-evening-leaf-forest-landscape.jpg</li>
+					<li>acorn: taken from squirrel image</li>
+					<li>gameover: selfmade</li>
+					<li>opening and game music: https://www.bensound.com/</li>
+				</ul>
+			</li>
+
+			<li><strong>Prototype Closest Other Game:</strong> Diner dash and learn to spell/type games for kids
+
+			</li>
+
+			<li><strong>High Concept:</strong> type to serve as many customers as you can in the given time
+			</li>
+
+			<li><strong>Theme:</strong> Sandwich
+			</li>
+
+			<li><strong>Mandated Variety:</strong> I have not made a game like this yet (diner dash)
+			</li>
+
+			<li><strong>Prototype Goal:</strong> see if kids enjoy the game or if it is too hard for them
+			</li>
+
+			<li><strong>Player Experience Goals:</strong> Learn new words while having fun
+			</li>
+
+			<li><strong>Gameplay:</strong> players ask customers what they want to have with SPACEBAR. <br>Then they go over the bar and type the name of that item <br>finally they go back to the customer and deliver the food with the ENTER Key
+			</li>
+
+			<li><strong>Strategies:</strong> type fast and dont forget
+			</li>
+
+			<li><strong>Story/Setting/Premise:</strong> you are a bartender serving customers. as many as you can until the store closes for the night
+			</li>
+
+			<li><strong>Target Audience:</strong>Kids who are learning to type and spell
+			</li>
+
+			<li><strong>Play Time:</strong> 150 seconds
+			</li>
+
+		</ul>
+	</div>
+</body>
+
+</html>
