@@ -92,6 +92,11 @@ BasicGame.Game.prototype = {
     this.timer.align = "left";
     this.timerTime = 120;
 
+    this.levelText = this.add.text(650, 20, 'Level: 1');
+    this.levelText.font = 'VT323';
+    this.levelText.fontSize = 30;
+    this.levelText.fill = "#ffffff";
+    this.levelText.align = "left";
 
     this.time.events.loop(Phaser.Timer.SECOND, this.timerUpdate, this);
 
@@ -169,6 +174,11 @@ BasicGame.Game.prototype = {
     this.s7.alpha = 0;
     this.s8.alpha = 0;
     this.s9.alpha = 0;
+
+    this.mintime = 500;
+    this.maxMul = 5;
+    this.level = 1;
+    this.timeMul = 25;
   },
 
   update: function() {
@@ -207,14 +217,14 @@ BasicGame.Game.prototype = {
       if (this.score <= 0) {
         this.gameOver();
       } else if (this.score >= 1000) {
-        this.gameWin();
+        this.levelUp();
       }
     }
   },
 
   betPeak: function() {
-    var r = Math.abs(this.realValue - this.guessValue) / 10.0;
-    r = 10 - r;
+    var r = Math.abs(this.realValue - this.guessValue) / (this.maxMul*this.maxMul/10.0);
+    r = 10.0 - r;
     r += Math.floor(Math.random() * 4) - 2;
     if (r > 10) {
       r = 10;
@@ -227,7 +237,7 @@ BasicGame.Game.prototype = {
     }
     setTimeout(function() {
       mygame.hideSq();
-    }, 500);
+    }, this.mintime * 10);
   },
 
   betReveal: function() {
@@ -249,10 +259,12 @@ BasicGame.Game.prototype = {
 
   redraw: function() {
     this.realValue = -1;
-    this.realText.text = "Real Value: ???";
+    setTimeout(function() {
+      mygame.realText.text = "Real Value: ???";
+    }, 1000);
 
-    this.mul1 = Math.floor(Math.random() * 10) + 1;
-    this.mul2 = Math.floor(Math.random() * 10) + 1;
+    this.mul1 = Math.floor(Math.random() * this.maxMul) + 1;
+    this.mul2 = Math.floor(Math.random() * this.maxMul) + 1;
     this.realValue = this.mul1 * this.mul2;
 
     this.showMul1();
@@ -260,12 +272,12 @@ BasicGame.Game.prototype = {
     this.XText.alpha = 1;
     setTimeout(function() {
       mygame.clearMul();
-    }, 5000);
+    }, this.mintime * 10);
   },
 
   showMul1: function() {
     while (this.mul1 > 0) {
-      var deltime =  (25 * (Math.floor(Math.random() * 100)));
+      var deltime =  (this.timeMul * (Math.floor(Math.random() * 100)));
       setTimeout(function() {
         mygame.randomMul1();
 
@@ -276,7 +288,7 @@ BasicGame.Game.prototype = {
 
   showMul2: function() {
     while (this.mul2 > 0) {
-      var deltime =  (25 * (Math.floor(Math.random() * 100)));
+      var deltime =  (this.timeMul * (Math.floor(Math.random() * 100)));
       setTimeout(function() {
         mygame.randomMul2();
       }, deltime);
@@ -286,11 +298,10 @@ BasicGame.Game.prototype = {
 
   randomMul1: function() {
     var good = false;
-    var deltime =  (25 * (Math.floor(Math.random() * 100))) + 500;
-    console.log(deltime);
+    var deltime =  (this.timeMul * (Math.floor(Math.random() * 100))) + this.mintime;
     while (!good) {
       good = true;
-      var rand = Math.floor(Math.random() * 10);
+      var rand = Math.floor(Math.random() * this.maxMul);
       if (rand == 0 && this.m10.alpha == 0) {
         this.m10.alpha = 1;
         setTimeout(function() {
@@ -349,10 +360,10 @@ BasicGame.Game.prototype = {
 
   randomMul2: function() {
     var good = false;
-    var deltime =  (25 * (Math.floor(Math.random() * 100))) + 500;
+    var deltime =  (this.timeMul * (Math.floor(Math.random() * 100))) + this.mintime;
     while (!good) {
       good = true;
-      var rand = Math.floor(Math.random() * 10);
+      var rand = Math.floor(Math.random() * this.maxMul);
       if (rand == 0 && this.m20.alpha == 0) {
         this.m20.alpha = 1;
         setTimeout(function() {
@@ -410,7 +421,6 @@ BasicGame.Game.prototype = {
   },
 
   clearMul: function() {
-    console.log("clear");
     this.XText.alpha = 0;
 
     this.m10.alpha = 0;
@@ -458,12 +468,15 @@ BasicGame.Game.prototype = {
   },
 
   timerUpdate: function() {
+    if (mygame.playingG === false) {
+      return;
+    }
     mygame.timer.text = "Time Left: " + --mygame.timerTime;
-    if (mygame.timerTime == 0) {
+    if (mygame.timerTime <= 0) {
       if (mygame.score >= 1000) {
         mygame.gameWin();
       }else {
-        mygame.gameOver();  
+        mygame.gameOver();
       }
     }
   },
@@ -514,7 +527,7 @@ BasicGame.Game.prototype = {
       alpha: 1
     }, 2000, "Linear", true);
 
-    this.time.events.stop();
+    //this.time.events.stop();
 
     this.music.fadeOut(1000);
 
@@ -527,26 +540,18 @@ BasicGame.Game.prototype = {
     }, 1000, "Linear", true, 2000);
   },
 
-  gameWin: function() {
-    this.playingG = false;
-
-    var gw = this.add.sprite(50, 50, 'gamewin');
-    gw.alpha = 0;
-
-    this.add.tween(gw).to({
-      alpha: 1
-    }, 2000, "Linear", true);
-
-    this.time.events.stop();
-
-    this.music.fadeOut(1000);
-
-    var butt = this.add.button(this.world.centerX - 95, 400, 'restartButton', this.restart, this, 2, 1, 0);
-
-    butt.alpha = 0;
-
-    this.add.tween(butt).to({
-      alpha: 1
-    }, 1000, "Linear", true, 2000);
+  levelUp: function() {
+    this.level++;
+    this.levelText.text = "Level: " + this.level;
+    this.score = 500;
+    this.timerTime += 60/(this.level/2) + 15;
+    if(this.maxMul < 10){
+      this.maxMul++;
+    } else {
+      this.mintime -= 50;
+      if (this.timeMul > 5) {
+        this.timeMul -= 2;
+      }
+    }
   }
 };
