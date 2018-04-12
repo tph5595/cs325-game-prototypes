@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Quick Maths</title>
+	<script src="js/phaser.min.js"></script>
+	<!-- Boot.js must come first since it creates the BasicGame object
+	that stores all the states. -->
+	<script src="js/Boot.js"></script>
+	<script src="js/Preloader.js"></script>
+	<script src="js/MainMenu.js"></script>
+	<script src="js/Game.js"></script>
+	<!-- main.js must come last since it references the other ones. -->
+	<script src="js/main.js"></script>
+
+	<style>
+		body {
+			color: #777;
+			font-family: "Avenir", Verdana, sans-serif;
+		}
+
+		#readme {
+			margin-top: 10px;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div id="game"></div>
+	<div id="readme">
+		<h2>Quick Maths</h2>
+
+		<ul>
+			<li><strong>Originality:</strong> I modified a lot of the graphics from base templates i found online. The other originality that i added is that have to memorize or react quickly to what you see on the screen and do quick maths.
+				kids.
+			</li>
+
+			<li><strong>Technical Merit:</strong> quick math memorization game with a hot/cold method with squirrels.
+			</li>
+
+			<li><strong>Prototype Postmortem:</strong>The hardest part was getting the timing on the screen right to achieve the desired level of difficulty.
+			</li>
+
+			<li><strong>Prototype Assets:</strong> modified assets from online
+				<ul>
+					<li>squirrel: https://www.colourbox.com/vector/cute-cartoon-squirrel-vector-6980042</li>
+					<li>another squirrel: https://www.dreamstime.com/stock-illustration-cartoon-squirrel-cute-looking-back-vector-clip-art-illustration-simple-gradients-all-single-layer-image58190693</li>
+					<li>fat squirrel: https://www.bigstockphoto.com/search/squirrel-cartoon/</li>
+					<li>crazy squirrel: https://graphicriver.net/item/cartoon-squirrel/13286092</li>
+					<li>happy squirrel: https://www.123rf.com/photo_45709941_stock-vector-happy-cartoon-squirrel-running-with-an-acorn-vector-clip-art-illustration-with-simple-gradients-acor.html</li>
+					<li>background: https://previews.123rf.com/images/inhasemiankova/inhasemiankova1603/inhasemiankova160300124/68493637-vector-cartoon-game-background-of-evening-leaf-forest-landscape.jpg</li>
+					<li>acorn: taken from squirrel image</li>
+					<li>gameover: selfmade</li>
+					<li>opening and game music: https://www.bensound.com/</li>
+				</ul>
+			</li>
+
+			<li><strong>Prototype Closest Other Game:</strong> My protype didnt do too well. I still think it is a good concept but it need more grounding in a story/theme and something more than just straight guessing. I think that the squirrels added that needed element. ALso i think the math makes it make more sense and more fun than just guessing a number. 
+
+			</li>
+
+			<li><strong>High Concept:</strong> guess the right number to get more points
+			</li>
+
+			<li><strong>Theme:</strong> N/A (It was optional)
+			</li>
+
+			<li><strong>Mandated Variety:</strong> I have not made a game like this yet
+			</li>
+
+			<li><strong>Prototype Goal:</strong> See if the flow is correct with the concept
+			</li>
+
+			<li><strong>Player Experience Goals:</strong> Competative game, addrenlaline.
+			</li>
+
+			<li><strong>Gameplay:</strong> Player sees a multiplication problem (number of nuts) appear on the screen.
+				<br>They guess what the answer was with the arrow keys (up and down to +/- 1, left and right to -/+ 10)
+				<br>They hit SPACEBAR to lock in answer
+				<br>Squirrels estimate how close you were (more the better, 10 max)
+				<br>You then get one more guess (Same mechanic as before for selecting and locking in)
+				<br>The real answer is shown and points are given (more points for closer guesses, - points for over 50 away)
+				<br>Hit ENTER to move to next round
+				<br>
+				<br>    0 points -> Lose
+				<br> 1000 points -> Win
+			</li>
+
+			<li><strong>Strategies:</strong> Look fast and dont forget
+			</li>
+
+			<li><strong>Story/Setting/Premise:</strong> Help the squirrels prepare for the winter by collecting enough nuts to survive.
+			</li>
+
+			<li><strong>Target Audience:</strong>Kids who love fast paced games and want to get better at math estimations
+			</li>
+
+			<li><strong>Play Time:</strong> 120 seconds
+			</li>
+
+		</ul>
+	</div>
+</body>
+
+</html>
