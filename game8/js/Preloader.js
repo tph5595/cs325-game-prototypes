@@ -35,7 +35,7 @@ BasicGame.Preloader.prototype = {
     this.load.audio('gameMusic', ['assets/gamesong.mp3']);
 
     this.load.audio('trackN', ['assets/trackN.mp3']);
-    this.load.audio('trainN', ['assets/trainN2.mp3']);
+    this.load.audio('trainN', ['assets/trainN.mp3']);
 
     //	+ lots of other required assets here
     this.load.image('logo', 'assets/logo.png');

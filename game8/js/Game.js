@@ -516,7 +516,7 @@ BasicGame.Game.prototype = {
       mygame.img43.alpha = 0;
       mygame.img44.alpha = 0;
       mygame.randomTrack();
-    }, 4500);
+    }, 5000);
 
 
   }
